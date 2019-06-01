@@ -1,0 +1,5 @@
+micronaut:
+  application:
+    name: streaming-sample
+  server:
+    port: 9080
