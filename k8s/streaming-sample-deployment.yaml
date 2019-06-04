@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streaming-server-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: streaming-server
+    spec:
+      containers:
+        - name: streaming-server-container
+          image: kosera/streaming-server:1.0.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "150m"
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: streaming-server

@@ -5,14 +5,25 @@ import io.micronaut.http.annotation.Get;
 import io.reactivex.Flowable;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-@Controller("/api")
+@Controller
 public class StreamingController {
 
-    @Get(value = "/et-list", processes = "text/csv")
+    @Get(value = "/groups", processes = "text/csv")
     public Flowable<String> text() {
-        return Flowable.range(1, 1000).map(x -> LocalDate.now().plusYears(x) + ", attending: yes\n");
+        return Flowable.range(1, 10).map(StreamingController::text);
     }
 
+    private static String text(int r) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < 10; i++) {
+            builder.append(LocalDate.now().plusYears(i))
+                    .append(", ")
+                    .append("Group: ")
+                    .append(r)
+                    .append("\n");
+        }
+        return builder.toString();
+    }
 }

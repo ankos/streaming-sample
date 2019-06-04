@@ -4,7 +4,7 @@
 FROM gradle:5.4.1-jdk11 AS builder
 WORKDIR /home/gradle/project
 COPY --chown=gradle:gradle ./ ./
-RUN gradle build
+RUN gradle build --info
 
 #
 # Step 2: Copy the jar to a new container to minimize the the size
